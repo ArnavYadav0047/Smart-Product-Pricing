@@ -1,0 +1,16 @@
+# Commands to run the image download script for train and test datasets
+
+# Step 1: Navigate to the project directory
+cd smart-product-pricing/utils
+
+# Step 2: Ensure dependencies are installed
+pip install -r ../Model_LightGBM/requirements.txt
+
+# Step 3: Download training images
+python download_images.py --csv ../dataset/train.csv
+
+# Step 4: Download test images
+python download_images.py --csv ../dataset/test.csv
+
+# (Optional) Adjust MAX_WORKERS in the script for your CPU/network capacity
+# Images will be saved in "train/" and "test/" folders respectively
