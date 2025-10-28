@@ -157,11 +157,31 @@ $$Loss = 0.85 \times logMAE + 0.15 \times CrossEntropy$$
 ### Workflow:
 
 ```bash
-cd Model_Multimodal
-python train_fusion.py     # Train fusion model
-python predict.py          # Generate predictions
-python stack_lgbm.py       # Train LightGBM stacker
-python scripts/blend2_predict.py  # Final two-way blending
+# 1. Generate image embeddings
+# Terminal:
+python embed_image.py
+
+# 2. Generate text embeddings
+python embed_text.py
+
+# 3. Engineer tabular features
+python features.py
+
+# 4. Prepare .pt dataset caches (combines all features)
+python prepare_data.py
+
+# 5. Train the fusion neural model (regression head and OOF storage)
+python train_fusion.py --train_pt caches/train_data.pt --out_dir outputs/fusion
+
+# 6. Train the LightGBM stacker
+python stack_lgbm.py --train_pt caches/train_data.pt --test_pt caches/test_data.pt --out_dir outputs/stacker
+
+# 7. Predict on the test set (fusion model)
+python predict.py --out_csv outputs/final/test_out.csv
+
+# 8. Blend neural and LightGBM predictions (final submission)
+python blend_predict.py --cv_summary_dir outputs/fusion --stacker_dir outputs/stacker --test_csv dataset/test.csv --sample_out_csv dataset/sample_test_out.csv --out_csv outputs/final/test_out_blended.csv
+
 ```
 
 ---
