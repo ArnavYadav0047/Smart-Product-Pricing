@@ -211,6 +211,6 @@ Feature importances and validation plots are saved under `outputs/calibrations/`
 
 * Fixed random seeds for numpy, torch, and LightGBM
 * Works on CPU-only systems (under 7 hours runtime)
-* Tested on Python 3.8+
+* Tested on Python 3.10+
 
 ---
