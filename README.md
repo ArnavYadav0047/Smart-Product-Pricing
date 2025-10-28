@@ -54,14 +54,16 @@ smart-product-pricing/
 │   └── requirements.txt
 │
 └── Model_Multimodal/
-    ├── train_fusion.py
+    ├── blend_predict.py
+    ├── embed_image.py
+    ├── embed_text.py
+    ├── features.py
     ├── predict.py
+    ├── prepare_data.py
     ├── stack_lgbm.py
+    ├── train_fusion.py
     ├── utils_metrics.py
     ├── requirements.txt
-    ├── scripts/
-    │   ├── blend2_predict.py
-    │   └── calibrate_predictions.py
 ```
 
 ---
